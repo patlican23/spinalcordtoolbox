@@ -54,13 +54,7 @@ Step 1: Segmenting the spinal cord
 
    The :ref:`spinalcord-segmentation` tutorial provides a more in-depth look at spinal cord segmentation. If you have already completed that tutorial, your ``t2/`` directory should contain a file called ``t2_seg.nii.gz``. If it does, you may skip this section and proceed with the :ref:`vert-labeling-section` section.
 
-Theory
-======
-
 First, we will run the ``sct_deepseg_sc`` command to segment the spinal cord from the anatomical image. The segmented spinal cord is a requirement for the vertebral/disc labeling stage that comes after. It is also a requirement for registration to the template (because some steps of the registration involve the segmentation) and for computing cord morphometrics, such as CSA.
-
-Command: ``sct_deepseg_sc``
-===========================
 
 .. code:: sh
 
@@ -165,9 +159,6 @@ The most relevant output files are ``t2_seg_labeled.nii.gz`` and ``t2_seg_labele
 
    Input/output images for ``sct_label_vertebrae``.
 
-Command: ``sct_label_utils``
-============================
-
 Not all of the labels produced by ``sct_label_vertebrae`` are necessary for registration. To discard the extra vertebral levels, we use ``sct_label_utils`` to create a new label image containing only 2 of the labels. These points are used to match the levels of the subject to the levels of the template, and correspond to the top and bottom vertebrae we wish to use for image registration.
 
 .. code:: sh
@@ -205,9 +196,6 @@ Step 3: Registering the anatomical image to the PAM50 template
 
    Steps performed by ``sct_register_to_template``
 
-Theory
-======
-
 Now that we have the labeled spinal cord, we can register the anatomical image to the template.
 
 .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/thin-plate-straightening.png
@@ -225,9 +213,6 @@ After this, a multi-step nonrigid deformation is estimated to match the subjectâ
 .. note::
 
    The default settings should work for most cases. However, SCT provides a variety of algorithms with pros and cons depending on your data. You might want to play with the parameters of these steps to optimize registration for your particular contrast, resolution, and spinal cord geometry. The available settings are explored further in the :ref:`customizing-registration-section` section.
-
-Command: ``sct_register_to_template``
-=====================================
 
 .. code:: sh
 
@@ -269,13 +254,7 @@ Step 4: Transforming template objects into the subject space
 
    Steps performed by ``sct_warp_template``.
 
-Theory
-======
-
 Once the transformations are estimated, we can apply the resulting warping field to the template to bring it into to the subjectâ€™s native space.
-
-Command
-=======
 
 .. code:: sh
 
