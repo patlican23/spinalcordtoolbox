@@ -62,7 +62,7 @@ SCT generates warping fields in the 5D composite ITK format. This format is not 
 
    .. code::
 
-      # Convert ITK warping field to FSL warping field (with
+      # Convert ITK warping field to FSL warping field (with additional 'ref_img.nii.gz' reference)
       sct_image -i warp_itk.nii.gz -to-fsl input_img.nii.gz ref_img.nii.gz -o warp_fsl.nii.gz
 
       # Here is the corresponding FSL `applywarp` command with `-r` specified
