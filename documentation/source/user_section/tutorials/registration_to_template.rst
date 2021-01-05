@@ -24,12 +24,6 @@ This tutorial demonstrates how to use SCT's command-line scripts to register an 
       # Output:
       # dmri  fmri  LICENSE.txt  mt  README.txt  t1  t2  t2s
 
-   .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/spinalcord_segmentation/t2_image.png
-      :align: right
-      :figwidth: 8%
-
-      t2.nii.gz
-
    We will start with T2-weighted images, so navigate to the ``t2`` directory and verify that it contains a T2-weighted anatomical image called ``t2.nii.gz``.
 
    .. code:: sh
@@ -38,6 +32,12 @@ This tutorial demonstrates how to use SCT's command-line scripts to register an 
       ls
       # Output:
       # t2.nii.gz
+
+   .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/spinalcord_segmentation/t2_image.png
+      :align: center
+      :figwidth: 300px
+
+      t2.nii.gz
 
 .. _segmentation-section:
 
