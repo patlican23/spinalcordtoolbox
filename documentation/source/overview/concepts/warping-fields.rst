@@ -15,7 +15,7 @@ Warping fields (also known as deformation fields) are files that represent an im
 
 Warping fields are also used internally within several SCT tools:
 
-* ``sct_straight_spinalcord``: When straightening a spinal cord image, two warping fields are created for the forward and inverse transformations between the curved anatomical image and the straightened image.
+* ``sct_straighten_spinalcord``: When straightening a spinal cord image, two warping fields are created for the forward and inverse transformations between the curved anatomical image and the straightened image.
 * ``sct_register_to_template``: When registering a spinal cord image to a template, two warping fields are created for the forward and inverse transformations between the anatomical image space and the template space.
 
 Warping field conventions
