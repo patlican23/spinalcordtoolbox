@@ -91,36 +91,40 @@ Step 2: Vertebral/disc labeling
 
    Steps performed by ``sct_label_vertebrae`` and ``sct_label_utils``.
 
-Theory
-======
+Next, the segmented spinal cord must be labeled to provide reference markers for matching the PAM50 template to subject's MRI.
 
-.. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/instrumentation-missing-discs.png
-   :align: right
-   :figwidth: 25%
+Labeling conventions
+====================
 
-   ``sct_label_vertebrae`` is able to label vertebral levels despite missing discs due to instrumentation.
+SCT uses two types of label files: one is based on vertebral levels, while the other is based on intervertebral discs. For vertebral levels, the convention is to place labels as though the vertebrae were projected onto the spinal cord, centered in the middle of the vertebral level. For discs, the convention is to place labels on the posterior tip of the disc.
 
-Next, the segmented spinal cord must be labeled to provide reference markers for matching the PAM50 template to subject's MRI.  The vertebral/disc labeling algorithm works as follows:
+.. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/vertebral-labeling-conventions.png
+   :align: center
+   :figwidth: 500px
+
+   Conventions for vertebral and disc labels.
+
+Labeling algorithm
+==================
+
+The vertebral/disc labeling algorithm works as follows:
 
   #. The spinal cord is straightened to make it easier to process.
   #. Then, labeling is done using an automatic method that finds the C2-C3 disc, then finds neighbouring discs using a similarity measure with the PAM50 template at each specific level.
 
      - The C2-C3 disc is used as a starting point because it is a distinct disc that is easy to detect (compared to, say, the T7-T9 discs, which are indistinct compared to one another).
-     - The labeling algorithm uses several priors from the template, including the probabilistic distance between adjacent discs and the size of the vertebral discs. These priors allow it to be robust enough to handle cases where instrumentation results in missing discs.
+     - The labeling algorithm uses several priors from the template, including the probabilistic distance between adjacent discs and the size of the vertebral discs. These priors allow it to be robust enough to handle cases where instrumentation results in missing discs or susceptibility artifacts.
+     - Labels are produced for both vertebral levels and intervertebral discs.
 
-  #. Finally, the spinal cord and the labeled segmentation are both un-straightened.
+  #. Finally, the spinal cord and the labeled segmentation are both un-straightened, and the labels are saved to image files.
 
-
-Label files are produced for both vertebral levels and intervertebral discs, and either can be used for the later registration steps. For vertebral levels, the convention is to place labels as though the vertebrae were projected onto the spinal cord, centered in the middle of the vertebral level. For discs, the convention is to place labels on the posterior tip of the disc.
-
-.. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/vertebral-labeling-conventions.png
+.. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/instrumentation-missing-discs.png
    :align: center
-   :figwidth: 25%
+   :figwidth: 400px
 
-   Conventions for vertebral and disc labels.
+   ``sct_label_vertebrae`` is able to label vertebral levels despite missing discs due to instrumentation.
 
-Command: ``sct_label_vertebrae``
-================================
+To apply the labeling algorithm, we use the following command:
 
 .. code:: sh
 
