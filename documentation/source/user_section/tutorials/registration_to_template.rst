@@ -39,6 +39,8 @@ This tutorial demonstrates how to use SCT's command-line scripts to register an 
 
       t2.nii.gz
 
+----------
+
 .. _segmentation-section:
 
 Step 1: Segmenting the spinal cord
@@ -73,6 +75,10 @@ First, we will run the ``sct_deepseg_sc`` command to segment the spinal cord fro
    :figwidth: 65%
 
    Input/output images for ``sct_deepseg_sc``.
+
+
+----------
+
 
 .. _vert-labeling-section:
 
@@ -185,6 +191,10 @@ Not all of the labels produced by ``sct_label_vertebrae`` are necessary for regi
 
    If you provide more than 2 labels, there will be a non-linear transformation along z, which implies that everything above the top label and below the bottom label will be lost in the transformation. Therefore, if you are interested in regions outside of the specified labels, only use one or two labels, but no more.
 
+
+----------
+
+
 .. _registration-section:
 
 Step 3: Registering the anatomical image to the PAM50 template
@@ -243,6 +253,10 @@ The most relevant of the output files is ``warp_template2anat.nii.gz``, which wi
 
    Input/output images for ``sct_register_to_template``.
 
+
+----------
+
+
 .. _transforming-template-section:
 
 Step 4: Transforming template objects into the subject space
@@ -277,6 +291,10 @@ The ``label/template`` directory contains 15 template objects. (The full list ca
    :figwidth: 65%
 
    Input/output images for ``sct_warp_template``.
+
+
+----------
+
 
 .. _compute-metrics-section:
 
