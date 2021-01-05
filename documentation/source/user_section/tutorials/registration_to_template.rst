@@ -76,7 +76,7 @@ Command: ``sct_deepseg_sc``
 
 .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/spinalcord_segmentation/t2_propseg_before_after.png
    :align: center
-   :figwidth: 50%
+   :figwidth: 65%
 
    Input/output images for ``sct_deepseg_sc``.
 
@@ -157,7 +157,7 @@ The most relevant output files are ``t2_seg_labeled.nii.gz`` and ``t2_seg_labele
 
 .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/io-sct_label_vertebrae.png
    :align: center
-   :figwidth: 50%
+   :figwidth: 65%
 
    Input/output images for ``sct_label_vertebrae``.
 
@@ -180,7 +180,7 @@ Not all of the labels produced by ``sct_label_vertebrae`` are necessary for regi
 
 .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/io-sct_label_utils.png
    :align: center
-   :figwidth: 50%
+   :figwidth: 65%
 
    Input/output images for ``sct_label_utils``.
 
@@ -250,7 +250,7 @@ The most relevant of the output files is ``warp_template2anat.nii.gz``, which wi
 
 .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/io-sct_register_to_template.png
    :align: center
-   :figwidth: 50%
+   :figwidth: 65%
 
    Input/output images for ``sct_register_to_template``.
 
@@ -291,7 +291,7 @@ The ``label/template`` directory contains 15 template objects. (The full list ca
 
 .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/io-sct_warp_template.png
    :align: center
-   :figwidth: 50%
+   :figwidth: 65%
 
    Input/output images for ``sct_warp_template``.
 
