@@ -57,7 +57,7 @@ Step 1: Segmenting the spinal cord
 Theory
 ======
 
-First, we will run the ``sct_deepseg_sc`` command to segment the spinal cord from the anatomical image. The segmented spinal cord is a requirement for the vertebral/disc labeling stage that comes after.
+First, we will run the ``sct_deepseg_sc`` command to segment the spinal cord from the anatomical image. The segmented spinal cord is a requirement for the vertebral/disc labeling stage that comes after. It is also a requirement for registration to the template (because some steps of the registration involve the segmentation) and for computing cord morphometrics, such as CSA.
 
 Command: ``sct_deepseg_sc``
 ===========================
