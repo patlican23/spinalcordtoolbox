@@ -48,7 +48,7 @@ Step 1: Segmenting the spinal cord
 
 .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/registration-pipeline-1.png
    :align: center
-   :figwidth: 75%
+   :figwidth: 100%
 
    Steps performed by ``sct_deepseg_sc``.
 
@@ -87,7 +87,7 @@ Step 2: Vertebral/disc labeling
 
 .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/registration-pipeline-2.png
    :align: center
-   :figwidth: 75%
+   :figwidth: 100%
 
    Steps performed by ``sct_label_vertebrae`` and ``sct_label_utils``.
 
@@ -202,7 +202,7 @@ Step 3: Registering the anatomical image to the PAM50 template
 
 .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/registration-pipeline-3.png
    :align: center
-   :figwidth: 75%
+   :figwidth: 100%
 
    Steps performed by ``sct_register_to_template``
 
@@ -264,7 +264,7 @@ Step 4: Transforming template objects into the subject space
 
 .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/registration-pipeline-4.png
    :align: center
-   :figwidth: 75%
+   :figwidth: 100%
 
    Steps performed by ``sct_warp_template``.
 
