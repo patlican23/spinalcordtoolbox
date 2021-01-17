@@ -21,7 +21,7 @@ The easiest way to approach ``-param`` is to begin with the default command, the
           step=1,type=imseg,algo=centermassrot,metric=MeanSquares,iter=10,smooth=0,gradStep=0.5,slicewise=0,smoothWarpXY=2,pca_eigenratio_th=1.6:
           step=2,type=seg,algo=bsplinesyn,metric=MeanSquares,iter=3,smooth=1,gradStep=0.5,slicewise=0,smoothWarpXY=2,pca_eigenratio_th=1.6
 
-This long string of values defines a 3-step transformation. Each step is separated by a `:` character, and each step begins with ``"step=#"``. The parameters for each step are separated by `,` characters.
+This long string of values defines a 3-step transformation. Each step is separated by a ``:`` character, and each step begins with ``"step=#"``. The parameters for each step are separated by ``,`` characters.
 
 Typically, step 0 is not altered. However, steps 1 and 2 can be tweaked, and additional steps (e.g. 3, 4) can be added.
 
@@ -46,7 +46,7 @@ These default parameters have been chosen so that step 1 applies coarse adjustme
 
 * ``type``: Carefully choose ``type={im, seg}`` based on the quality of your data, and the similarity with the template. Ideally, you would always choose ``type=im``. However, if you find that there are artifacts of image features (e.g., no CSF/cord contrast) that could compromise the registration, then use ``type=seg`` instead. Of course, if you choose ``type=seg``, make sure your segmentation is good (manually adjust it if it is not). By default, ``sct_register_to_template`` relies on the segmentations only because it was found to be more robust to the existing variety of MRIs.
 * ``metric``: Adjust metric based on type. With ``type=im``, use ``metric=CC`` (cross-correlation: accurate but long) or ``MI`` (mutual information: fast, but requires enough voxels). With ``type=seg`` or with images with the exact same contrast and intensity (e.g., fMRI time series, or two images acquired with the same acquisition parameters), use ``metric=MeanSquares``.
-* ``slicewise``: Only applies to ``algo={translation, rigid, affine, syn, bsplinesyn}``. If set to `0`, a unique 3D transformation is estimated. If set to `1`, transformations are estimated for each axial slice independently.
+* ``slicewise``: Only applies to ``algo={translation, rigid, affine, syn, bsplinesyn}``. If set to ``0``, a unique 3D transformation is estimated. If set to ``1``, transformations are estimated for each axial slice independently.
 
 The ``-ref`` argument
 *********************
