@@ -3,14 +3,16 @@
 Customizing the ``sct_register_to_template`` command
 ####################################################
 
-While the default usage of ``sct_register_to_template`` is simple enough, the underlying command provides many options to adapt the registration process to your specific data and pipeline. The subsections below provide an overview of common tweaks to the command.
+This page provides recommendations for how to adjust ``sct_register_to_template`` when the default parameters aren't sufficient for your specific data and pipeline.
 
 Because choosing the right configuration for your data can be overwhelming, SCT provides a forum where you can ask for clarification and guidance.
 
 The ``-param`` argument
 ***********************
 
-The flag -param lets you select registration parameters at each step. Below is a sample input for ``-param``:
+The ``-param`` argument controls which transformations are applied at each step of the registration process. ``-param`` provides many configurations to choose from; this makes it powerful and flexible, but also challenging to work with.
+
+The easiest way to approach ``-param`` is to begin with the default command, then make small adjustments one parameter at a time. The default values for ``-param`` are shown below:
 
 .. code-block::
 
@@ -19,13 +21,11 @@ The flag -param lets you select registration parameters at each step. Below is a
           step=1,type=imseg,algo=centermassrot,metric=MeanSquares,iter=10,smooth=0,gradStep=0.5,slicewise=0,smoothWarpXY=2,pca_eigenratio_th=1.6:
           step=2,type=seg,algo=bsplinesyn,metric=MeanSquares,iter=3,smooth=1,gradStep=0.5,slicewise=0,smoothWarpXY=2,pca_eigenratio_th=1.6
 
-This long string of values defines a 3-step transformation. Each step is separated by a ``:`` character, and begins with ``step=#``, where ``#`` can be ``0, 1, 2, etc``. At each step, a distinct transformation is computed:
+This long string of values defines a 3-step transformation. Each step is separated by a `:` character, and each step begins with ``"step=#"``. The parameters for each step are separated by `,` characters.
 
-* **Step 0:** Straighten the spinal cord, then match the subject labels to the template labels.
-* **Step 1:** Nonrigid deformation, first pass. Deals with large deformations in the spinal cord.
-* **Step 2:** Nonrigid deformation, second pass. Applies fine cord shape adjustments.
+Typically, step 0 is not altered. However, steps 1 and 2 can be tweaked, and additional steps (e.g. 3, 4) can be added.
 
-Typically, step 0 is not altered. However, Steps 1 and 2 can be tweaked, and additional steps (e.g. 3, 4) can be added. Some of the common parameters to tweak include:
+These default parameters have been chosen so that step 1 applies coarse adjustments, while step 2 applies fine adjustments. In general, we recommend that you stick to this kind of approach, by gradually applying finer and finer adjustments with each successive step.
 
    .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/sct_register_to_template-param-algo.png
       :align: right
