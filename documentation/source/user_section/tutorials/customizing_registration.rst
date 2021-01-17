@@ -5,7 +5,7 @@ Customizing the ``sct_register_to_template`` command
 
 This page provides recommendations for how to adjust ``sct_register_to_template`` when the default parameters aren't sufficient for your specific data and pipeline.
 
-Because choosing the right configuration for your data can be overwhelming, SCT provides a forum where you can ask for clarification and guidance.
+Because choosing the right configuration for your data can be overwhelming, feel free to visit the `SCT forum <https://forum.spinalcordmri.org/c/sct/>`_ where you can ask for clarification and guidance.
 
 The ``-param`` argument
 ***********************
