@@ -54,8 +54,8 @@ Each step requires an algorithm that applies a nonrigid deformation to the spina
    - **columnwise**: This algorithm is particularly interested in case of highly compressed cords. The first step consists in matching the edges of the source and destination segmentations in the R-L direction (scaling operation), and during the second step, each row of the source segmentation is matched to the destination segmentation (scaling operation in the A-P direction). After iterating across all rows in the R-L direction, a warping field is produced. This non-linear deformation is more controlled than the SyN-based approach. This method only works with segmentations (not images). The idea came from Dr. Allan Martin (University of Toronto, UC Davis).
 
    .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/sct_register_to_template-param-algo.png
-      :align: right
-      :figwidth: 40%
+      :align: center
+      :figwidth: 50%
 
       Visualization of algorithms to choose from for the ``algo`` parameter of ``-param``.
 
