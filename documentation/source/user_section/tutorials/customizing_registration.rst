@@ -23,15 +23,24 @@ The easiest way to approach ``-param`` is to begin with the default command, the
 
 This long string of values defines a 3-step transformation. Each step is separated by a ``:`` character, and each step begins with ``"step=#"``. The parameters for each step are separated by ``,`` characters.
 
-Typically, step 0 is not altered. However, steps 1 and 2 can be tweaked, and additional steps (e.g. 3, 4) can be added.
+The default parameters have been chosen so that step 1 applies coarse adjustments, while step 2 applies fine adjustments. In general, we recommend that you stick to this kind of approach, by gradually applying finer and finer adjustments with each successive step.
 
-These default parameters have been chosen so that step 1 applies coarse adjustments, while step 2 applies fine adjustments. In general, we recommend that you stick to this kind of approach, by gradually applying finer and finer adjustments with each successive step.
+.. note:: Step 0 is a special step that typically should not be altered. However, steps 1 and 2 can be tweaked, and additional steps (e.g. 3, 4) can be added.
 
-   .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/sct_register_to_template-param-algo.png
-      :align: right
-      :figwidth: 40%
+Image registration type: ``-param type``
+========================================
 
-      Visualization of algorithms to choose from for the ``algo`` parameter of ``-param``.
+* ``type``: Carefully choose ``type={im, seg}`` based on the quality of your data, and the similarity with the template. Ideally, you would always choose ``type=im``. However, if you find that there are artifacts of image features (e.g., no CSF/cord contrast) that could compromise the registration, then use ``type=seg`` instead. Of course, if you choose ``type=seg``, make sure your segmentation is good (manually adjust it if it is not). By default, ``sct_register_to_template`` relies on the segmentations only because it was found to be more robust to the existing variety of MRIs.
+
+Similarity metric: ``-param metric``
+====================================
+
+* ``metric``: Adjust metric based on type. With ``type=im``, use ``metric=CC`` (cross-correlation: accurate but long) or ``MI`` (mutual information: fast, but requires enough voxels). With ``type=seg`` or with images with the exact same contrast and intensity (e.g., fMRI time series, or two images acquired with the same acquisition parameters), use ``metric=MeanSquares``.
+
+Nonrigid deformation algorithm: ``-param algo``
+===============================================
+
+Each step requires an algorithm that applies a nonrigid deformation to the spinal cord. Each algorithm has different motivations for choosing it: Some algorithms apply fine adjustments, some apply coarse adjustments, and some are particular suited to certain types of data.
 
 * ``algo`` This is the algorithm used to compute the nonrigid deformation. Choice of algorithm depends on how coarse/fine you want your transformation to be. This depends on which step you are modifying (Step 1, step 2, step 3, etc.) as well as the nature of the spinal cord you are working with.
 
@@ -44,9 +53,16 @@ These default parameters have been chosen so that step 1 applies coarse adjustme
    - **centermassrot**: Compute the center of mass of the source and destination segmentation and align them slice-by-slice. This algorithm also estimates the orientation of the cord in the axial plane and matches that of the destination cord. This feature could be useful in case the subject rotated their neck, or if the cord is rotated due to a disc compression. Note that this algorithm only works with segmentations (contrary to slicereg).
    - **columnwise**: This algorithm is particularly interested in case of highly compressed cords. The first step consists in matching the edges of the source and destination segmentations in the R-L direction (scaling operation), and during the second step, each row of the source segmentation is matched to the destination segmentation (scaling operation in the A-P direction). After iterating across all rows in the R-L direction, a warping field is produced. This non-linear deformation is more controlled than the SyN-based approach. This method only works with segmentations (not images). The idea came from Dr. Allan Martin (University of Toronto, UC Davis).
 
-* ``type``: Carefully choose ``type={im, seg}`` based on the quality of your data, and the similarity with the template. Ideally, you would always choose ``type=im``. However, if you find that there are artifacts of image features (e.g., no CSF/cord contrast) that could compromise the registration, then use ``type=seg`` instead. Of course, if you choose ``type=seg``, make sure your segmentation is good (manually adjust it if it is not). By default, ``sct_register_to_template`` relies on the segmentations only because it was found to be more robust to the existing variety of MRIs.
-* ``metric``: Adjust metric based on type. With ``type=im``, use ``metric=CC`` (cross-correlation: accurate but long) or ``MI`` (mutual information: fast, but requires enough voxels). With ``type=seg`` or with images with the exact same contrast and intensity (e.g., fMRI time series, or two images acquired with the same acquisition parameters), use ``metric=MeanSquares``.
-* ``slicewise``: Only applies to ``algo={translation, rigid, affine, syn, bsplinesyn}``. If set to ``0``, a unique 3D transformation is estimated. If set to ``1``, transformations are estimated for each axial slice independently.
+   .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/sct_register_to_template-param-algo.png
+      :align: right
+      :figwidth: 40%
+
+      Visualization of algorithms to choose from for the ``algo`` parameter of ``-param``.
+
+Slice-by-slice transformations: ``-param slicewise``
+====================================================
+
+* ``slicewise``: Only applies to ``algo={translation, rigid, affine, syn, bsplinesyn}``. If set to ``0``, a unique 3D transformation is estimated. If set to ``1``, transformations are estimated for each axial slice independently
 
 The ``-ref`` argument
 *********************
