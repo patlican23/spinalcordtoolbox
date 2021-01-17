@@ -5,14 +5,12 @@ Customizing the ``sct_register_to_template`` command
 
 This page provides recommendations for how to adjust ``sct_register_to_template`` when the default parameters aren't sufficient for your specific data and pipeline.
 
-Because choosing the right configuration for your data can be overwhelming, feel free to visit the `SCT forum <https://forum.spinalcordmri.org/c/sct/>`_ where you can ask for clarification and guidance.
+.. note:: Because choosing the right configuration for your data can be overwhelming, feel free to visit the `SCT forum <https://forum.spinalcordmri.org/c/sct/>`_ where you can ask for clarification and guidance.
 
 The ``-param`` argument
 ***********************
 
-The ``-param`` argument controls which transformations are applied at each step of the registration process. ``-param`` provides many configurations to choose from; this makes it powerful and flexible, but also challenging to work with.
-
-The easiest way to approach ``-param`` is to begin with the default command, then make small adjustments one parameter at a time. The default values for ``-param`` are shown below:
+The ``-param`` argument controls which transformations are applied at each step of the registration process. ``-param`` provides many configurations to choose from; this makes it powerful and flexible, but also challenging to work with. So, the easiest way to approach ``-param`` is to begin with the default command, then make small adjustments one parameter at a time. The default values for ``-param`` are shown below:
 
 .. code-block::
 
@@ -42,20 +40,34 @@ Nonrigid deformation algorithm: ``-param algo``
 
 Each step requires an algorithm that applies a nonrigid deformation to the spinal cord. Each algorithm has different motivations for choosing it: Some algorithms apply fine adjustments, some apply coarse adjustments, and some are particular suited to certain kinds of spinal cords.
 
-   - **translation**: axial translation (x-y)
-   - **rigid**: x-y translation + rotation about z axis
-   - **affine**:
-   - **b-splinesyn**: based on ants binaries
-   - **syn**: (not bspline regularized)
-   - **slicereg**: slice-wise translations (x-y). The translations within each slice are regularized across slices in the superior-inferior (S-I) direction. This algorithm can be used to align two images that are already "close" to each other, or it can be used to align two segmentations for a pre-alignment of cord centerline.
-   - **centermassrot**: Compute the center of mass of the source and destination segmentation and align them slice-by-slice. This algorithm also estimates the orientation of the cord in the axial plane and matches that of the destination cord. This feature could be useful in case the subject rotated their neck, or if the cord is rotated due to a disc compression. Note that this algorithm only works with segmentations (contrary to slicereg).
-   - **columnwise**: This algorithm is particularly interested in case of highly compressed cords. The first step consists in matching the edges of the source and destination segmentations in the R-L direction (scaling operation), and during the second step, each row of the source segmentation is matched to the destination segmentation (scaling operation in the A-P direction). After iterating across all rows in the R-L direction, a warping field is produced. This non-linear deformation is more controlled than the SyN-based approach. This method only works with segmentations (not images). The idea came from Dr. Allan Martin (University of Toronto, UC Davis).
+.. list-table:: Algorithm choices
+   :widths: 20 80
+   :header-rows: 1
 
-   .. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/sct_register_to_template-param-algo.png
-      :align: center
-      :figwidth: 50%
+   * - Algorithm
+     - Description
+   * - ``algo=translation``
+     - axial translation (x-y)
+   * - ``algo=rigid``
+     - x-y translation + rotation about z axis
+   * - ``algo=affine``
+     - <placeholder>
+   * - ``algo=b-splinesyn``
+     - based on ants binaries
+   * - ``algo=syn``
+     - (not bspline regularized)
+   * - ``algo=slicereg``
+     - slice-wise translations (x-y). The translations within each slice are regularized across slices in the superior-inferior (S-I) direction. This algorithm can be used to align two images that are already "close" to each other, or it can be used to align two segmentations for a pre-alignment of cord centerline.
+   * - ``algo=centermassrot``
+     - Compute the center of mass of the source and destination segmentation and align them slice-by-slice. This algorithm also estimates the orientation of the cord in the axial plane and matches that of the destination cord. This feature could be useful in case the subject rotated their neck, or if the cord is rotated due to a disc compression. Note that this algorithm only works with segmentations (contrary to slicereg).
+   * - ``algo=columnwise``
+     - This algorithm is particularly interested in case of highly compressed cords. The first step consists in matching the edges of the source and destination segmentations in the R-L direction (scaling operation), and during the second step, each row of the source segmentation is matched to the destination segmentation (scaling operation in the A-P direction). After iterating across all rows in the R-L direction, a warping field is produced. This non-linear deformation is more controlled than the SyN-based approach. This method only works with segmentations (not images). The idea came from Dr. Allan Martin (University of Toronto, UC Davis).
 
-      Visualization of algorithms to choose from for the ``algo`` parameter of ``-param``.
+.. figure:: https://raw.githubusercontent.com/spinalcordtoolbox/doc-figures/master/registration_to_template/sct_register_to_template-param-algo.png
+  :align: center
+  :figwidth: 50%
+
+  Algorithm choices for ``-param algo``.
 
 Slice-by-slice transformations: ``-param slicewise``
 ====================================================
