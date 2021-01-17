@@ -35,6 +35,11 @@ Similarity metric: ``-param metric``
 
 Adjust metric based on type. With ``type=im``, use ``metric=CC`` (cross-correlation: accurate but long) or ``MI`` (mutual information: fast, but requires enough voxels). With ``type=seg`` or with images with the exact same contrast and intensity (e.g., fMRI time series, or two images acquired with the same acquisition parameters), use ``metric=MeanSquares``.
 
+Slice-by-slice transformations: ``-param slicewise``
+====================================================
+
+Only applies to ``algo={translation, rigid, affine, syn, bsplinesyn}``. If set to ``0``, a unique 3D transformation is estimated. If set to ``1``, transformations are estimated for each axial slice independently
+
 Nonrigid deformation algorithm: ``-param algo``
 ===============================================
 
@@ -68,11 +73,6 @@ Each step requires an algorithm that applies a nonrigid deformation to the spina
   :figwidth: 50%
 
   Algorithm choices for ``-param algo``.
-
-Slice-by-slice transformations: ``-param slicewise``
-====================================================
-
-Only applies to ``algo={translation, rigid, affine, syn, bsplinesyn}``. If set to ``0``, a unique 3D transformation is estimated. If set to ``1``, transformations are estimated for each axial slice independently
 
 The ``-ref`` argument
 *********************
