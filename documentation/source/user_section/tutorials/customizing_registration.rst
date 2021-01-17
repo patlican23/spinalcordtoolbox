@@ -30,19 +30,17 @@ The default parameters have been chosen so that step 1 applies coarse adjustment
 Image registration type: ``-param type``
 ========================================
 
-* ``type``: Carefully choose ``type={im, seg}`` based on the quality of your data, and the similarity with the template. Ideally, you would always choose ``type=im``. However, if you find that there are artifacts of image features (e.g., no CSF/cord contrast) that could compromise the registration, then use ``type=seg`` instead. Of course, if you choose ``type=seg``, make sure your segmentation is good (manually adjust it if it is not). By default, ``sct_register_to_template`` relies on the segmentations only because it was found to be more robust to the existing variety of MRIs.
+Carefully choose ``type={im, seg}`` based on the quality of your data, and the similarity with the template. Ideally, you would always choose ``type=im``. However, if you find that there are artifacts of image features (e.g., no CSF/cord contrast) that could compromise the registration, then use ``type=seg`` instead. Of course, if you choose ``type=seg``, make sure your segmentation is good (manually adjust it if it is not). By default, ``sct_register_to_template`` relies on the segmentations only because it was found to be more robust to the existing variety of MRIs.
 
 Similarity metric: ``-param metric``
 ====================================
 
-* ``metric``: Adjust metric based on type. With ``type=im``, use ``metric=CC`` (cross-correlation: accurate but long) or ``MI`` (mutual information: fast, but requires enough voxels). With ``type=seg`` or with images with the exact same contrast and intensity (e.g., fMRI time series, or two images acquired with the same acquisition parameters), use ``metric=MeanSquares``.
+Adjust metric based on type. With ``type=im``, use ``metric=CC`` (cross-correlation: accurate but long) or ``MI`` (mutual information: fast, but requires enough voxels). With ``type=seg`` or with images with the exact same contrast and intensity (e.g., fMRI time series, or two images acquired with the same acquisition parameters), use ``metric=MeanSquares``.
 
 Nonrigid deformation algorithm: ``-param algo``
 ===============================================
 
-Each step requires an algorithm that applies a nonrigid deformation to the spinal cord. Each algorithm has different motivations for choosing it: Some algorithms apply fine adjustments, some apply coarse adjustments, and some are particular suited to certain types of data.
-
-* ``algo`` This is the algorithm used to compute the nonrigid deformation. Choice of algorithm depends on how coarse/fine you want your transformation to be. This depends on which step you are modifying (Step 1, step 2, step 3, etc.) as well as the nature of the spinal cord you are working with.
+Each step requires an algorithm that applies a nonrigid deformation to the spinal cord. Each algorithm has different motivations for choosing it: Some algorithms apply fine adjustments, some apply coarse adjustments, and some are particular suited to certain kinds of spinal cords.
 
    - **translation**: axial translation (x-y)
    - **rigid**: x-y translation + rotation about z axis
@@ -62,7 +60,7 @@ Each step requires an algorithm that applies a nonrigid deformation to the spina
 Slice-by-slice transformations: ``-param slicewise``
 ====================================================
 
-* ``slicewise``: Only applies to ``algo={translation, rigid, affine, syn, bsplinesyn}``. If set to ``0``, a unique 3D transformation is estimated. If set to ``1``, transformations are estimated for each axial slice independently
+Only applies to ``algo={translation, rigid, affine, syn, bsplinesyn}``. If set to ``0``, a unique 3D transformation is estimated. If set to ``1``, transformations are estimated for each axial slice independently
 
 The ``-ref`` argument
 *********************
